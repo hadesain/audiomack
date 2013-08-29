@@ -18,7 +18,7 @@ This plugin will generate the necessary embed codes.
 
 = Author =
 
-Svetoslav Marinov (Slavi) | <a href="http://orbisius.com" title="Wordpress Plugin Development St. Catharines, Niagara" target="_blank">Custom Web Programming and Design by orbisius.com</a>
+For more information visit <a href="http://audiomack.com" title="Audiomack is the place for artists to effortlessly share their music and for fans to discover and download free songs and albums." target="_blank">Audiomack.com</a>
 
 == Installation ==
 
