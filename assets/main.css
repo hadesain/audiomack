@@ -1,0 +1,18 @@
+/* (c) AudioMack.com */
+
+.audiomack_container_public .hide, .audiomack_container .hide {
+    display: none;
+}
+
+.audiomack_container .success {
+    color:green;
+}
+
+.audiomack_container .error {
+    color:red;
+}
+
+/* This css overrides WordPress' limit of 200px. We need this because the fields do not fit on one line. */
+.audiomack_container .form-table th {
+    max-width: 150px;
+}
