@@ -305,7 +305,7 @@ function audiomack_settings_page() {
     <div class="wrap audiomack_container">
         <h2>Audiomack</h2>
         <p>
-            This plugin allows you to embed a song or an album from Audiomack on your site.
+            This plugin allows you to embed a song or an album from <a href="http://www.audiomack.com/" target="_blank">Audiomack</a> on your site.
         </p>
         <?php if (empty($saved)) : ?>
             <p>
