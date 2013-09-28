@@ -27,7 +27,7 @@
 
 			// Register example button
 			ed.addButton('tinymce_audiomack', {
-				title : 'AudioMack',
+				title : 'Audiomack',
 				cmd : 'mcetinymce_audiomack',
 				image : url + '/icon.jpg'
 			});
@@ -46,10 +46,10 @@
 		 */
 		getInfo : function() {
 			return {
-					longname  : 'AudioMack',
-					author 	  : 'AudioMack Inc.',
-					authorurl : 'http://www.AudioMack.com',
-					infourl   : 'http://www.AudioMack.com',
+					longname  : 'Audiomack',
+					author 	  : 'Audiomack',
+					authorurl : 'http://www.Audiomack.com',
+					infourl   : 'http://www.Audiomack.com',
 					version   : "1.0.0"
 			};
 		}

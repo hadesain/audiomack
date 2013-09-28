@@ -1,15 +1,15 @@
 <?php 
 /*
-Plugin Name: AudioMack
+Plugin Name: Audiomack
 Plugin URI: http://wordpress.org/plugins/audiomack
 Description: Audiomack is the place for artists to effortlessly share their music and for fans to discover and download free songs and albums.
 Version: 1.1.0
-Author: AudioMack Inc.
+Author: Audiomack
 Author URI: http://audiomack.com
 License: GPL2
 */
 
-// Developed by Svetoslav Marinov (SLAVI) | orbisius.com for AudioMack Inc.
+// Developed by Svetoslav Marinov (SLAVI) | orbisius.com for Audiomack
 
 // use widgets_init action hook to execute custom function
 add_action( 'init', 'audiomack_init' );
@@ -99,7 +99,7 @@ function audiomack_get_plugin_data() {
 }
 
 /**
- * This function processes [audiomack src=""] shortcode and replaces it with AudioMack player.
+ * This function processes [audiomack src=""] shortcode and replaces it with Audiomack player.
  * It expects the src to contain album or song prefix e.g.
  * - http://www.audiomack.com/song/hiphopfeeling/nowish
  * - http://www.audiomack.com/album/tutankhamun-brothers/whats-a-black-beatle
@@ -193,11 +193,11 @@ function audiomack_load_assets() {
 }
 
 /**
- * Adds the menu under Settings > AudioMack
+ * Adds the menu under Settings > Audiomack
  */
 function audiomack_create_menu() {
 	//create a submenu under Settings
-	add_options_page( 'AudioMack', 'AudioMack', 'manage_options', __FILE__, 'audiomack_settings_page' );
+	add_options_page( 'Audiomack', 'Audiomack', 'manage_options', __FILE__, 'audiomack_settings_page' );
     
 	// when plugins are shown add a settings link near my plugin for a quick access to the settings page.
 	add_filter('plugin_action_links', 'audiomack_add_plugin_settings_link', 10, 2);
@@ -303,9 +303,9 @@ function audiomack_settings_page() {
     ?>
 
     <div class="wrap audiomack_container">
-        <h2>AudioMack</h2>
+        <h2>Audiomack</h2>
         <p>
-            This plugin allows you to embed a song or an album from AudioMack on your site.
+            This plugin allows you to embed a song or an album from Audiomack on your site.
         </p>
         <?php if (empty($saved)) : ?>
             <p>
@@ -508,7 +508,7 @@ function audiomack_ajax_render_popup_content() {
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
-        <title>AudioMack</title>
+        <title>Audiomack</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <script language="javascript" type="text/javascript" src="<?php echo $site_url; ?>/wp-includes/js/jquery/jquery.js"></script>
 
@@ -606,7 +606,7 @@ function audiomack_ajax_render_popup_content() {
                    */
 
                 /**
-                 * This method is called after a success reply from AudioMack servers.
+                 * This method is called after a success reply from Audiomack servers.
                  * It iterates over the results and creates nice result boxes which the use can click
                  * and it will insert the shortcode within the post/page.
                  * The data is appended using jQuery to '.results' container.
@@ -622,7 +622,7 @@ function audiomack_ajax_render_popup_content() {
                             var result_item_buff = '';
                             var link = item_rec.url;
                             var title = item_rec.title;
-                            var audiomack_ssl_active = false; // change to true when AudioMack.com has ssl certificate.
+                            var audiomack_ssl_active = false; // change to true when Audiomack.com has ssl certificate.
                             var ssl = <?php echo is_ssl() ? 1 : 0; ?>;
                             
                             // Let's add the URL prefix if it doesn't exist
@@ -823,7 +823,7 @@ function audiomack_ajax_render_popup_content() {
                 <ul>
                     <li id="audiomack_tab" class="current"><span>
                             <a href="javascript:mcTabs.displayTab('audiomack_tab','audiomack_panel');"
-                               onmousedown="return false;"><?php _e("AudioMack", 'audiomack'); ?></a></span></li>
+                               onmousedown="return false;"><?php _e("Audiomack", 'audiomack'); ?></a></span></li>
                     <li id="audiomack_search_tab"><span>
                             <a href="javascript:mcTabs.displayTab('audiomack_search_tab','audiomack_search_panel');"
                                onmousedown="return false;"><?php _e("Search", 'audiomack'); ?></a></span></li>
