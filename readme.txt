@@ -45,5 +45,10 @@ n/a
 
 == Changelog ==
 
+= 1.1.0 =
+* Added a search tab in the Audiomack's icon
+* Made album player height 352px
+* Fixes and other improvements
+
 = 1.0.0 =
 * Initial Release

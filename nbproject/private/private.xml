@@ -11,7 +11,7 @@
             <url>audiomack.php</url>
             <bookmark id="2">
                 <name/>
-                <line>134</line>
+                <line>146</line>
                 <key/>
             </bookmark>
         </file>
@@ -34,7 +34,6 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/1">
         <file>file:/C:/projects/default/htdocs/wordpress313/wp-content/plugins/audiomack/audiomack.php</file>
-        <file>file:/C:/projects/default/htdocs/wordpress313/wp-content/plugins/audiomack/tinymce/editor_plugin.min.js</file>
-        <file>file:/C:/projects/default/htdocs/wordpress313/wp-content/plugins/audiomack/tinymce/editor_plugin.js</file>
+        <file>file:/C:/projects/default/htdocs/wordpress313/wp-content/plugins/audiomack/readme.txt</file>
     </open-files>
 </project-private>
