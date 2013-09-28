@@ -3,7 +3,7 @@ Contributors: audiomack,lordspace
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7APYDVPBCSY9A
 Tags: wordpress,wp,plugins,mp3,audio,music,artist,artists,soundcloud, html5, flash, player, embed,embed code,shortcode,
 Requires at least: 3.0.0
-Tested up to: 3.6
+Tested up to: 3.6.1
 Stable tag: 1.1.0
 License: GPLv2 or later
 
@@ -49,6 +49,7 @@ n/a
 * Added a search tab in the Audiomack's icon
 * Made album player height 352px
 * Fixes and other improvements
+* Tested with WP 3.6.1
 
 = 1.0.0 =
 * Initial Release
