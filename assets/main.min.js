@@ -1,0 +1,1 @@
+jQuery(document).ready(function(){if(typeof jQuery.wp==="object"&&typeof jQuery.wp.wpColorPicker==="function"){jQuery("#player_color, #background_color, #text_color").wpColorPicker()}else{jQuery("#player_color_picker").farbtastic("#player_color");jQuery("#background_color_picker").farbtastic("#background_color");jQuery("#text_color_picker").farbtastic("#text_color")}})

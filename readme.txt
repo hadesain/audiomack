@@ -45,6 +45,9 @@ n/a
 
 == Changelog ==
 
+= 1.1.1 =
+* Added a color picker to make selecting colors easier.
+
 = 1.1.0 =
 * Added a search tab in the Audiomack's icon
 * Made album player height 352px
