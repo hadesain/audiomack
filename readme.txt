@@ -45,6 +45,10 @@ n/a
 
 == Changelog ==
 
+= 1.1.2 =
+* Added uninstall.php to clean up after the plugin deletion.
+* Added tutorial video (TODO)
+
 = 1.1.1 =
 * Added a color picker to make selecting colors easier.
 
