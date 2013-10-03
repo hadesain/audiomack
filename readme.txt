@@ -17,7 +17,8 @@ With this plugin all you need to do is click on the sound icon in edit page/post
 This plugin will generate the necessary embed codes.
 
 = Demo =
-https://www.youtube.com/watch?v=dA3PU91jf0c&feature=youtu.be
+
+http://www.youtube.com/watch?v=dA3PU91jf0c
 
 = Help us put Audiomack on WordPress.com =
 
