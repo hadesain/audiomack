@@ -16,8 +16,14 @@ Audiomack is the place for artists to effortlessly share their music and for fan
 With this plugin all you need to do is click on the sound icon in edit page/post screen and then paste the web link to a song or album.
 This plugin will generate the necessary embed codes.
 
-= Author =
+= Demo =
+https://www.youtube.com/watch?v=dA3PU91jf0c&feature=youtu.be
 
+= Help us put Audiomack on WordPress.com =
+
+<a href="http://en.forums.wordpress.com/topic/whitelist-audiomack-embeds" target="_blank">http://en.forums.wordpress.com/topic/whitelist-audiomack-embeds</a>
+
+= Author =
 For more information visit <a href="http://audiomack.com" title="Audiomack is the place for artists to effortlessly share their music and for fans to discover and download free songs and albums." target="_blank">Audiomack.com</a>
 
 == Installation ==
@@ -47,7 +53,7 @@ n/a
 
 = 1.1.2 =
 * Added uninstall.php to clean up after the plugin deletion.
-* Added tutorial video (TODO)
+* Added tutorial video to the readme.txt and in the settings page.
 
 = 1.1.1 =
 * Added a color picker to make selecting colors easier.

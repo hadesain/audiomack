@@ -186,8 +186,7 @@ function audiomack_load_assets() {
     //Access the global $wp_version variable to see which version of WordPress is installed.
     global $wp_version;
 
-    $color_picker = version_compare($wp_version, '3.5') >= 0
-            ? 'wp-color-picker' // new WP
+    $color_picker = version_compare($wp_version, '3.5') >= 0 ? 'wp-color-picker' // new WP
             : 'farbtastic'; // old WP
 
     wp_enqueue_style($color_picker);
@@ -195,9 +194,9 @@ function audiomack_load_assets() {
 
     wp_register_style('audiomack_css', plugins_url("/assets/main{$suffix}.css", __FILE__));
     wp_enqueue_style('audiomack_css');
-    
-    wp_register_script( 'audiomack_js', plugins_url("/assets/main{$suffix}.js", __FILE__), array('jquery', ), '1.0', true);
-    wp_enqueue_script( 'audiomack_js' );
+
+    wp_register_script('audiomack_js', plugins_url("/assets/main{$suffix}.js", __FILE__), array('jquery',), '1.0', true);
+    wp_enqueue_script('audiomack_js');
 }
 
 /**
@@ -238,7 +237,7 @@ function audiomack_get_options() {
         'slim' => '', // for songs only
     );
 
-	// if you change the key update the uninstall.php too
+    // if you change the key update the uninstall.php too
     $current_options = get_option('audiomack_options', $defaults);
     $current_options = array_merge($defaults, $current_options);
 
@@ -314,15 +313,15 @@ function audiomack_settings_page() {
         <p>
             This plugin allows you to embed a song or an album from <a href="http://www.audiomack.com/" target="_blank">Audiomack</a> on your site.
         </p>
-    <?php if (empty($saved)) : ?>
+        <?php if (empty($saved)) : ?>
             <p>
                 Configure the player settings below.
             </p>
-    <?php else : ?>
+        <?php else : ?>
             <div class="updated"><p>
                     Settings were saved.
                 </p></div>
-    <?php endif; ?>
+        <?php endif; ?>
 
         <form method="post">
             <table class="form-table">
@@ -335,24 +334,24 @@ function audiomack_settings_page() {
                             <tr valign="top">
                                 <th scope="row"><label for="player_color">Player Color:</label></th>
                                 <td><input maxlength="10" size="4" id="player_color" name="player_color"
-                                            autocomplete="off"
-                                            value="#<?php echo esc_attr($current_options['player_color']); ?>" />
+                                           autocomplete="off"
+                                           value="#<?php echo esc_attr($current_options['player_color']); ?>" />
                                     <div id="player_color_picker"></div>
                                 </td>
                             </tr>
                             <tr valign="top">
                                 <th scope="row"><label for="background_color">Player Background Color:</label></th>
                                 <td><input maxlength="10" size="4" id="background_color" name="background_color"
-                                            autocomplete="off"
-                                            value="#<?php echo esc_attr($current_options['background_color']); ?>" />
+                                           autocomplete="off"
+                                           value="#<?php echo esc_attr($current_options['background_color']); ?>" />
                                     <div id="background_color_picker"></div>
                                 </td>
                             </tr>
                             <tr valign="top">
                                 <th scope="row"><label for="text_color">Text Color:</label></th>
                                 <td><input maxlength="10" size="4" id="text_color" name="text_color"
-                                            autocomplete="off"
-                                            value="#<?php echo esc_attr($current_options['text_color']); ?>" />
+                                           autocomplete="off"
+                                           value="#<?php echo esc_attr($current_options['text_color']); ?>" />
                                     <div id="text_color_picker"></div>
                                 </td>
                             </tr>
@@ -387,8 +386,8 @@ function audiomack_settings_page() {
 
                         <div class="">
                             <p>
-    <?php //echo do_shortcode('[audiomack src="http://www.audiomack.com/song/hiphopfeeling/nowish"]');  ?>
-    <?php echo do_shortcode('[audiomack src="http://www.audiomack.com/song/nas/let-nas-down-remix-feat-nas"]'); ?>
+                                <?php //echo do_shortcode('[audiomack src="http://www.audiomack.com/song/hiphopfeeling/nowish"]');   ?>
+                                <?php echo do_shortcode('[audiomack src="http://www.audiomack.com/song/nas/let-nas-down-remix-feat-nas"]'); ?>
                             </p>
                         </div>
                     </td>
@@ -425,13 +424,31 @@ function audiomack_settings_page() {
             </p>
         </div>
 
-    <?php
-    $plugin_data = get_plugin_data(__FILE__);
+        <h2>Video Demo</h2>
 
-    $app_link = urlencode($plugin_data['PluginURI']);
-    $app_title = urlencode($plugin_data['Name']);
-    $app_descr = urlencode($plugin_data['Description']);
-    ?>
+        <div>
+            [ <a href="javascript:void(0);" onclick="jQuery('.audiomack_plugin_demo').toggle('slow');">show/hide </a> ]
+
+            <div class="audiomack_plugin_demo hide">
+                <iframe width="560" height="315" src="http://www.youtube.com/embed/dA3PU91jf0c" frameborder="0" allowfullscreen></iframe>
+
+                <br/>Video Link: <a href="http://www.youtube.com/watch?v=dA3PU91jf0c&feature=youtu.be"
+                                    target="_blank">http://www.youtube.com/watch?v=dA3PU91jf0c</a>
+            </div>
+        </div>
+        
+        <h2>Help us put Audiomack plugin on WordPress.com</h2>
+        <div class="">
+            <a href="http://en.forums.wordpress.com/topic/whitelist-audiomack-embeds" target="_blank">http://en.forums.wordpress.com/topic/whitelist-audiomack-embeds</a>
+        </div>
+
+        <?php
+        $plugin_data = get_plugin_data(__FILE__);
+
+        $app_link = urlencode($plugin_data['PluginURI']);
+        $app_title = urlencode($plugin_data['Name']);
+        $app_descr = urlencode($plugin_data['Description']);
+        ?>
         <h2>Share</h2>
         <p>
             <!-- AddThis Button BEGIN -->
@@ -453,10 +470,10 @@ function audiomack_settings_page() {
         <!-- The JS code is in the footer -->
 
         <script type="text/javascript">
-            var addthis_config = {"data_track_clickback": true};
-            var addthis_share = {
-                templates: {twitter: 'Check out {{title}} #WordPress #plugin at {{lurl}} (via @Audio_Mack)'}
-            }
+                var addthis_config = {"data_track_clickback": true};
+                var addthis_share = {
+                    templates: {twitter: 'Check out {{title}} #WordPress #plugin at {{lurl}} (via @Audio_Mack)'}
+                }
         </script>
         <!-- AddThis Button START part2 -->
         <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=lordspace"></script>
@@ -650,7 +667,7 @@ function audiomack_ajax_render_popup_content() {
                             // create the Select button
                             result_item_buff += '<div class="select_wrapper">'
                                     + '<input type="button" class="result_item_select app_positive_button" '
-                            + 'data-url="' + link + '" value="Select" /> </div>';
+                                    + 'data-url="' + link + '" value="Select" /> </div>';
 
                             result_item_buff += '</div> <!-- /result_item_wrapper -->';
 
@@ -730,7 +747,7 @@ function audiomack_ajax_render_popup_content() {
                     }
 
                     content = audiomack.generate_shortcode(audio_src_url);
-                        } else if (search_tab.className.indexOf('current') != -1) {
+                    } else if (search_tab.className.indexOf('current') != -1) {
                             // not used
                         }
 
@@ -744,7 +761,7 @@ function audiomack_ajax_render_popup_content() {
                             jQuery.noConflict();
                             jQuery(document).ready(function($) {
                     audiomack.init();
-                });        </script>
+                });</script>
             <style>
                 body {
                     font-size: 12px !important;
