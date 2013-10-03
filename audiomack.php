@@ -238,6 +238,7 @@ function audiomack_get_options() {
         'slim' => '', // for songs only
     );
 
+	// if you change the key update the uninstall.php too
     $current_options = get_option('audiomack_options', $defaults);
     $current_options = array_merge($defaults, $current_options);
 
