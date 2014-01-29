@@ -3,7 +3,7 @@
   Plugin Name: Audiomack
   Plugin URI: http://www.audiomack.com/wordpress/
   Description: Audiomack is the place for artists to effortlessly share their music and for fans to discover and download free songs and albums.
-  Version: 1.1.5
+  Version: 1.1.6
   Author: Audiomack
   Author URI: http://audiomack.com
   License: GPL2
@@ -372,7 +372,7 @@ function audiomack_settings_page() {
                             </tr>
                             <tr valign="top">
                                 <td>
-                                    <input type="submit" name="save_settings" value="Save" class="button-primary" />
+                                    <input type="submit" name="save_settings" value="Save Changes" class="button-primary" />
                                 </td>
                             </tr>
                         </table>
