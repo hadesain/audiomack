@@ -3,7 +3,7 @@
   Plugin Name: Audiomack
   Plugin URI: http://www.audiomack.com/wordpress/
   Description: Audiomack is the place for artists to effortlessly share their music and for fans to discover and download free songs and albums.
-  Version: 1.1.6
+  Version: 1.1.7
   Author: Audiomack
   Author URI: http://audiomack.com
   License: GPL2
@@ -519,6 +519,17 @@ function audiomack_settings_page() {
 }
 
 /**
+ * Are we running WP 3.9 or higher?
+ * We need this because some of the TinyMCE API has changed.
+ */
+function audiomack_39up() {
+    global  $wp_version;
+    $wp_3_9_plus = floatval($wp_version) >= 3.9;
+
+    return $wp_3_9_plus ? 1 : 0;
+}
+
+/**
  * This is triggered by editor_plugin.min.js and WP proxies the ajax calls to this action.
  *
  * @return void
@@ -544,6 +555,7 @@ function audiomack_ajax_render_popup_content() {
 
             <script language="javascript" type="text/javascript">
                 var audiomack = {
+                    is_new_wp : <?php echo audiomack_39up(); ?>,
                 template : '<p>[audiomack src="%%AUDIO_SRC_URL%%"]</p><br/>',
                         /**
                          *
@@ -551,6 +563,14 @@ function audiomack_ajax_render_popup_content() {
                         init : function() {
                     tinyMCEPopup.resizeToInnerSize();
                     document.getElementById('audiomack_audio_src_url').focus();
+                },
+
+                close : function () {
+                    if (this.is_new_wp) {
+                        top.tinymce.activeEditor.windowManager.close();
+                    } else {
+                        tinyMCEPopup.close();
+                    }
                 },
                         /**
                          * This is necessary to be setup later because the data comes from AJAX.
@@ -577,14 +597,18 @@ function audiomack_ajax_render_popup_content() {
                     return content;
                 },
                         insert_content : function(content) {
-                    if (window.tinyMCE) {
+
+                    if (this.is_new_wp) {
+                        parent.tinyMCE.execCommand('mceInsertContent', false, content);
+                    } else if (window.tinyMCE) {
                         window.tinyMCE.execInstanceCommand('content', 'mceInsertContent', false, content);
                         //Peforms a clean up of the current editor HTML.
                         //tinyMCEPopup.editor.execCommand('mceCleanup');
                         //Repaints the editor. Sometimes the browser has graphic glitches.
                         tinyMCEPopup.editor.execCommand('mceRepaint');
-                        tinyMCEPopup.close();
                     }
+
+                    this.close();
                 },
                         /* // formatted using: http://jsonformatter.curiousconcept.com/
                          the response JSON should look like this:
@@ -666,8 +690,8 @@ function audiomack_ajax_render_popup_content() {
 
                             // create the Select button
                             result_item_buff += '<div class="select_wrapper">'
-                                    + '<input type="button" class="result_item_select app_positive_button" '
-                                    + 'data-url="' + link + '" value="Select" /> </div>';
+                                    + '<input type="button" class="result_item_select app_positive_button mceButton" '
+                                    + 'data-url="' + link + '" value="Select" /> </div><br/>';
 
                             result_item_buff += '</div> <!-- /result_item_wrapper -->';
 
@@ -763,8 +787,14 @@ function audiomack_ajax_render_popup_content() {
                     audiomack.init();
                 });</script>
             <style>
-                body {
-                    font-size: 12px !important;
+                /* Overiding defaults */
+                .panel_wrapper div.current {
+                    min-height: 500px;
+                    height: auto;
+                }
+                
+                body, html, #audiomack_form .tabs li a {
+                    font-size: 14px !important;
                 }
 
                 .audiomack_tinymce_plugin .error {
@@ -790,16 +820,19 @@ function audiomack_ajax_render_popup_content() {
                 .audiomack_tinymce_plugin .app_text_field {
                     border: 1px solid #888888;
                     padding: 3px;
+                    font-size: 14px;
                 }
 
                 .audiomack_tinymce_plugin #audiomack_search {
                     font-size: 12px;
                     margin: 2px 0;
                     padding: 2px 0;
+                    font-size: 14px;
                 }
 
+                /* the result container */
                 .audiomack_tinymce_plugin .results {
-                    height: 250px;
+                    min-height: 250px;
                     overflow-y: auto;
                 }
 
@@ -809,14 +842,19 @@ function audiomack_ajax_render_popup_content() {
                 }
 
                 .audiomack_tinymce_plugin .result_item_wrapper {
-                    float: left;
-                    width: 27%;
-                    height: 90px;
+                    display: inline-block;
+                    width: 30%;
+                    height: 95px;
                     min-height: 50;
                     margin: 1%;
                     border: 1px solid #888888;
                     padding: 2px;
                     text-align: center;
+                }
+
+                .audiomack_tinymce_plugin .result_item_wrapper:hover {
+                    border: 1px solid #777;
+                    background: #FFFF99;
                 }
 
                 .audiomack_tinymce_plugin .mceActionPanel {
@@ -836,11 +874,11 @@ function audiomack_ajax_render_popup_content() {
                 <div class="tabs">
                     <ul>
                         <li id="audiomack_tab" class="current"><span>
-                                <a href="javascript:mcTabs.displayTab('audiomack_tab','audiomack_panel');"
-                                   onmousedown="return false;"><?php _e("Audiomack", 'audiomack'); ?></a></span></li>
+                                <a href="javascript:void(0);"
+                                   onclick="mcTabs.displayTab('audiomack_tab','audiomack_panel');return false;"><?php _e("Audiomack", 'audiomack'); ?></a></span></li>
                         <li id="audiomack_search_tab"><span>
-                                <a href="javascript:mcTabs.displayTab('audiomack_search_tab','audiomack_search_panel');"
-                                   onmousedown="return false;"><?php _e("Search", 'audiomack'); ?></a></span></li>
+                                <a href="javascript:void(0);"
+                                   onclick="mcTabs.displayTab('audiomack_search_tab','audiomack_search_panel');return false;"><?php _e("Search", 'audiomack'); ?></a></span></li>
                     </ul>
                 </div>
 
@@ -870,13 +908,13 @@ function audiomack_ajax_render_popup_content() {
 
                         <div class="mceActionPanel">
                             <div style="float: left;">
-                                <input type="button" id="insert" name="insert" class='app_positive_button'
+                                <input type="button" id="audiomack_insert" name="insert" class='app_positive_button mceButton'
                                        value="<?php _e("Insert", 'audiomack'); ?>" onclick="audiomack.handle_regular_embed();" />
                             </div>
 
                             <div style="float: right;">
                                 <input type="button" id="cancel" name="cancel" class='app_negative_button'
-                                       value="<?php _e("Cancel", 'audiomack'); ?>" onclick="tinyMCEPopup.close();" />
+                                       value="<?php _e("Close", 'audiomack'); ?>" onclick="audiomack.close();" />
                             </div>
                         </div>
                     </div> <!-- /end audiomack_panel -->
@@ -893,7 +931,7 @@ function audiomack_ajax_render_popup_content() {
                                     <input type="text" id="audiomack_search_kwd" name="audiomack_search_kwd" value=""
                                            autocomplete='off' class='app_text_field' />
 
-                                    <input type="button" id="audiomack_search" name="audiomack_search" class='app_positive_button'
+                                    <input type="button" id="audiomack_search" name="audiomack_search" class='app_positive_button mceButton'
                                            value="<?php _e("Search", 'audiomack'); ?>" onclick="audiomack.search();" />
                                 </td>
                             </tr>

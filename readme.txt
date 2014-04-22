@@ -3,8 +3,8 @@ Contributors: audiomack,lordspace
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7APYDVPBCSY9A
 Tags: wordpress,wp,plugins,mp3,audio,music,artist,artists,soundcloud, html5, flash, player, embed,embed code,shortcode,
 Requires at least: 3.0.0
-Tested up to: 3.8.1
-Stable tag: 1.1.6
+Tested up to: 3.9
+Stable tag: 1.1.7
 License: GPLv2 or later
 
 Audiomack plugin allows you to add the audio player from Audiomack.com into your WordPress site using shortcodes.
@@ -51,6 +51,15 @@ If you have suggestions or run into an issue please email us at <a href="mailto:
 n/a
 
 == Changelog ==
+
+= 1.1.7 =
+* Improved the UI of the shortcode generator
+* Made the popup dialog to be 800x600
+* Increased the font of the shortcode generator to 14px
+* Updated screenshots to match the look of WP 3.7+
+* Deleted some old QR code files that were used for other purpose
+* Added a nice background color when hovering the result item.
+* Tested with WP 3.9
 
 = 1.1.6 =
 * Tested with WP 3.8.1

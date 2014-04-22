@@ -17,8 +17,8 @@
 			ed.addCommand('mcetinymce_audiomack', function() {
 				ed.windowManager.open({
 					file : ajaxurl + '?action=audiomack_ajax_render_popup_content', // wp admin ajax variable
-					width : 600 + ed.getLang('tinymce_audiomack.delta_width', 0),
-					height : 400 + ed.getLang('tinymce_audiomack.delta_height', 0),
+					width : 800 + ed.getLang('tinymce_audiomack.delta_width', 0),
+					height : 600 + ed.getLang('tinymce_audiomack.delta_height', 0),
 					inline : 1
 				}, {
 					plugin_url : url // Plugin absolute URL
@@ -33,9 +33,9 @@
 			});
 
 			// Add a node change handler, selects the button in the UI when a image is selected
-			ed.onNodeChange.add(function(ed, cm, n) {
+			/*ed.onNodeChange.add(function(ed, cm, n) {
 				cm.setActive('tinymce_audiomack', n.nodeName == 'IMG');
-			});
+			});*/
 		},
 
 		/**
