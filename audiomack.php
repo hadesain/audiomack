@@ -3,8 +3,8 @@
   Plugin Name: Audiomack
   Plugin URI: http://www.audiomack.com/wordpress/
   Description: Audiomack is the place for artists to effortlessly share their music and for fans to discover and download free songs and albums.
-  Version: 1.1.7
-  Author: Audiomack
+  Version: 1.1.8
+  Author: Audiomack.com
   Author URI: http://audiomack.com
   License: GPL2
  */
@@ -17,11 +17,20 @@ add_action('admin_init', 'audiomack_admin_init');
 add_action('admin_menu', 'audiomack_create_menu');
 
 /**
- * Setups loading of assets (css, js)
+ * Setups loading of assets (css, js - if any), registers shortcode and as oembed provider.
  * @return void
  */
 function audiomack_init() {
     add_shortcode('audiomack', 'audiomack_shortcode_audiomack');
+
+   /*
+   * Audiomack embed
+   * example URL: http://www.audiomack.com/song/360-media-uk/foreign-remix
+   * @see https://gist.github.com/jkudish/bc5ba7387f6382e01c88
+   */
+   // Register oEmbed provider
+   // The WP user will need to only paste a link to a song or album and the audio player will be generated.
+   wp_oembed_add_provider( '#https?://(www.)?audiomack.com/([^/]+)/([^/]+)/([^/]+)[/]{0,1}#', 'https://audiomack.com/oembed', true );
 }
 
 /**

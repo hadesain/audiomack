@@ -3,8 +3,8 @@ Contributors: audiomack,lordspace
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7APYDVPBCSY9A
 Tags: wordpress,wp,plugins,mp3,audio,music,artist,artists,soundcloud, html5, flash, player, embed,embed code,shortcode,
 Requires at least: 3.0.0
-Tested up to: 3.9
-Stable tag: 1.1.7
+Tested up to: 3.9.1
+Stable tag: 1.1.8
 License: GPLv2 or later
 
 Audiomack plugin allows you to add the audio player from Audiomack.com into your WordPress site using shortcodes.
@@ -19,10 +19,6 @@ This plugin will generate the necessary embed codes.
 = Demo =
 
 http://www.youtube.com/watch?v=dA3PU91jf0c
-
-= Help us put Audiomack on WordPress.com =
-
-<a href="http://en.forums.wordpress.com/topic/whitelist-audiomack-embeds" target="_blank">http://en.forums.wordpress.com/topic/whitelist-audiomack-embeds</a>
 
 = Author =
 For more information visit <a href="http://audiomack.com" title="Audiomack is the place for artists to effortlessly share their music and for fans to discover and download free songs and albums." target="_blank">Audiomack.com</a>
@@ -51,6 +47,10 @@ If you have suggestions or run into an issue please email us at <a href="mailto:
 n/a
 
 == Changelog ==
+
+= 1.1.8 =
+* Registered for oembed provider.
+* Removed text: Help us put Audiomack on WordPress.com from readme
 
 = 1.1.7 =
 * Improved the UI of the shortcode generator
