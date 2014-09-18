@@ -3,7 +3,7 @@
   Plugin Name: Audiomack
   Plugin URI: http://www.audiomack.com/wordpress/
   Description: Audiomack is the place for artists to effortlessly share their music and for fans to discover and download free songs and albums.
-  Version: 1.1.8
+  Version: 1.1.9
   Author: Audiomack.com
   Author URI: http://audiomack.com
   License: GPL2
@@ -30,7 +30,9 @@ function audiomack_init() {
    */
    // Register oEmbed provider
    // The WP user will need to only paste a link to a song or album and the audio player will be generated.
-   wp_oembed_add_provider( '#https?://(www.)?audiomack.com/([^/]+)/([^/]+)/([^/]+)[/]{0,1}#', 'https://audiomack.com/oembed', true );
+   wp_oembed_add_provider( '#https?://(www.)?audiomack.com/([^/]+)/([^/]+)/([^/]+)[/]{0,1}#i', 'https://audiomack.com/oembed', true );
+   wp_oembed_add_provider( '#https?://(www.)?audiomack.com/song/([^/]+)/([^/]+)[/]{0,1}#i', 'https://audiomack.com/oembed', true );
+   wp_oembed_add_provider( '#https?://(www.)?audiomack.com/album/([^/]+)/([^/]+)[/]{0,1}#i', 'https://audiomack.com/oembed', true );
 }
 
 /**
@@ -317,213 +319,213 @@ function audiomack_settings_page() {
     }
     ?>
 
-    <div class="wrap audiomack_container">
-        <h2>Audiomack</h2>
-        <p>
-            This plugin allows you to embed a song or an album from <a href="http://www.audiomack.com/" target="_blank">Audiomack</a> on your site.
-        </p>
-        <?php if (empty($saved)) : ?>
-            <p>
-                Configure the player settings below.
-            </p>
-        <?php else : ?>
-            <div class="updated"><p>
-                    Settings were saved.
-                </p></div>
-        <?php endif; ?>
-
-        <form method="post">
-            <table class="form-table">
-                <tr valign="top">
-                    <td>
-                        <h2>Player Settings</h2>
-
-                        <!-- Settings Table -->
-                        <table class="form-table">
-                            <tr valign="top">
-                                <th scope="row"><label for="player_color">Player Color:</label></th>
-                                <td><input maxlength="10" size="4" id="player_color" name="player_color"
-                                           autocomplete="off"
-                                           value="#<?php echo esc_attr($current_options['player_color']); ?>" />
-                                    <div id="player_color_picker"></div>
-                                </td>
-                            </tr>
-                            <tr valign="top">
-                                <th scope="row"><label for="background_color">Player Background Color:</label></th>
-                                <td><input maxlength="10" size="4" id="background_color" name="background_color"
-                                           autocomplete="off"
-                                           value="#<?php echo esc_attr($current_options['background_color']); ?>" />
-                                    <div id="background_color_picker"></div>
-                                </td>
-                            </tr>
-                            <tr valign="top">
-                                <th scope="row"><label for="text_color">Text Color:</label></th>
-                                <td><input maxlength="10" size="4" id="text_color" name="text_color"
-                                           autocomplete="off"
-                                           value="#<?php echo esc_attr($current_options['text_color']); ?>" />
-                                    <div id="text_color_picker"></div>
-                                </td>
-                            </tr>
-                            <tr valign="top">
-                                <th scope="row"><label for="width">Width (% or number):</label></th>
-                                <td>&nbsp;&nbsp;<input maxlength="10" size="4" id="width" name="width"
-                                                       autocomplete="off"
-                                                       value="<?php echo esc_attr($current_options['width']); ?>" />
-
-                                    e.g. 100% or 250 (&larr; that's in pixels)
-                                </td>
-                            </tr>
-                            <tr valign="top">
-                                <th scope="row"><label for="slim">Slim Player</label></th>
-                                <td><input id="slim" name="slim" type="checkbox" value="1" <?php checked(1, $current_options['slim']); ?> />
-                                    <label for="slim">Enable Slim Player (for songs only)</label>
-                                </td>
-                            </tr>
-                            <tr valign="top">
-                                <td>
-                                    <input type="submit" name="save_settings" value="Save Changes" class="button-primary" />
-                                </td>
-                            </tr>
-                        </table>
-                        <!-- /Settings Table -->
-                    </td>
-                    <td>
-                        <h2>Preview</h2>
-                        <div>
-                            To see the preview please save the settings.
-                        </div>
-
-                        <div class="">
-                            <p>
-                                <?php //echo do_shortcode('[audiomack src="http://www.audiomack.com/song/hiphopfeeling/nowish"]');   ?>
-                                <?php echo do_shortcode('[audiomack src="http://www.audiomack.com/song/nas/let-nas-down-remix-feat-nas"]'); ?>
-                            </p>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-
-
-        </form>
-
-        <br />
-
-
-        <h2>Usage
-            <!--<a href="javascript:void(0);" onclick="jQuery('.audiomack_help').toggle();">(show/hide)</a>-->
-        </h2>
-
-        <div class="audiomack_help hide00">
-            <p>
-                You can either click on this icon: <img src="<?php echo plugins_url('/tinymce/icon.jpg', __FILE__); ?>" alt="" /> in edit post/page or
-                paste the shortcodes below with <strong>src</strong> attribute pointing to a song or an album.
-                The plugin will generate the necessary embed code.
-            </p>
-            <p>
-            <table class="widefat">
-                <tr>
-                    <td><strong>[audiomack src="http://www.audiomack.com/song/nas/let-nas-down-remix-feat-nas"]</strong></td>
-                    <td>&larr; This will generate the embed code for a song</td>
-                </tr>
-                </tr>
-                <td><strong>[audiomack src="http://www.audiomack.com/album/tutankhamun-brothers/whats-a-black-beatle"]</strong></td>
-                <td>&larr; This will generate the embed code for an album</td>
-                </tr>
-            </table>
-            </p>
-        </div>
-
-        <h2>Video Demo</h2>
-
-        <div>
-            [ <a href="javascript:void(0);" onclick="jQuery('.audiomack_plugin_demo').toggle('slow');">show/hide </a> ]
-
-            <div class="audiomack_plugin_demo hide">
-                <iframe width="560" height="315" src="http://www.youtube.com/embed/dA3PU91jf0c" frameborder="0" allowfullscreen></iframe>
-
-                <br/>Video Link: <a href="http://www.youtube.com/watch?v=dA3PU91jf0c&feature=youtu.be"
-                                    target="_blank">http://www.youtube.com/watch?v=dA3PU91jf0c</a>
-            </div>
-        </div>
-        
-        <h2>Help us put Audiomack plugin on WordPress.com</h2>
-        <div class="">
-            <a href="http://en.forums.wordpress.com/topic/whitelist-audiomack-embeds" target="_blank">http://en.forums.wordpress.com/topic/whitelist-audiomack-embeds</a>
-        </div>
-
-        <?php
-        $plugin_data = get_plugin_data(__FILE__);
-
-        $app_link = urlencode($plugin_data['PluginURI']);
-        $app_title = urlencode($plugin_data['Name']);
-        $app_descr = urlencode($plugin_data['Description']);
-        ?>
-        <h2>Share</h2>
-        <p>
-            <!-- AddThis Button BEGIN -->
-        <div class="addthis_toolbox addthis_default_style addthis_32x32_style">
-            <a class="addthis_button_facebook" addthis:url="<?php echo $app_link ?>" addthis:title="<?php echo $app_title ?>" addthis:description="<?php echo $app_descr ?>"></a>
-            <a class="addthis_button_twitter" addthis:url="<?php echo $app_link ?>" addthis:title="<?php echo $app_title ?>" addthis:description="<?php echo $app_descr ?>"></a>
-            <a class="addthis_button_google_plusone" g:plusone:count="false" addthis:url="<?php echo $app_link ?>" addthis:title="<?php echo $app_title ?>" addthis:description="<?php echo $app_descr ?>"></a>
-            <a class="addthis_button_linkedin" addthis:url="<?php echo $app_link ?>" addthis:title="<?php echo $app_title ?>" addthis:description="<?php echo $app_descr ?>"></a>
-            <a class="addthis_button_email" addthis:url="<?php echo $app_link ?>" addthis:title="<?php echo $app_title ?>" addthis:description="<?php echo $app_descr ?>"></a>
-            <a class="addthis_button_myspace" addthis:url="<?php echo $app_link ?>" addthis:title="<?php echo $app_title ?>" addthis:description="<?php echo $app_descr ?>"></a>
-            <a class="addthis_button_google" addthis:url="<?php echo $app_link ?>" addthis:title="<?php echo $app_title ?>" addthis:description="<?php echo $app_descr ?>"></a>
-            <a class="addthis_button_digg" addthis:url="<?php echo $app_link ?>" addthis:title="<?php echo $app_title ?>" addthis:description="<?php echo $app_descr ?>"></a>
-            <a class="addthis_button_delicious" addthis:url="<?php echo $app_link ?>" addthis:title="<?php echo $app_title ?>" addthis:description="<?php echo $app_descr ?>"></a>
-            <a class="addthis_button_stumbleupon" addthis:url="<?php echo $app_link ?>" addthis:title="<?php echo $app_title ?>" addthis:description="<?php echo $app_descr ?>"></a>
-            <a class="addthis_button_tumblr" addthis:url="<?php echo $app_link ?>" addthis:title="<?php echo $app_title ?>" addthis:description="<?php echo $app_descr ?>"></a>
-            <a class="addthis_button_favorites" addthis:url="<?php echo $app_link ?>" addthis:title="<?php echo $app_title ?>" addthis:description="<?php echo $app_descr ?>"></a>
-            <a class="addthis_button_compact"></a>
-        </div>
-        <!-- The JS code is in the footer -->
-
-        <script type="text/javascript">
-                var addthis_config = {"data_track_clickback": true};
-                var addthis_share = {
-                    templates: {twitter: 'Check out {{title}} #WordPress #plugin at {{lurl}} (via @Audio_Mack)'}
-                }
-        </script>
-        <!-- AddThis Button START part2 -->
-        <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=lordspace"></script>
-        <!-- AddThis Button END part2 -->
+<div class="wrap audiomack_container">
+	<div id="icon-options-general" class="icon32"></div>
+    <h2>Audiomack</h2>
+	<p>
+        This plugin allows you to embed a song or an album from <a href="http://www.audiomack.com/" target="_blank">Audiomack</a> on your site.
     </p>
-
-    <h2>Support & Feature Requests</h2>
-    <div class="updated"><p>
-            If you have suggestions or run into an issue please email us at <a href="mailto:support@audiomack.com?subject=audiomack wp plugin">support@audiomack.com</a>.
-            Please do NOT use the WordPress forums or other places to seek support.
-        </p></div>
-
-    <?php if (0) : /* TMP deactivated */ ?>
-        <h2>Mailing List</h2>
-        <p>
-            Get the latest news and updates about this and future cool
-            <a href="http://profiles.wordpress.org/lordspace/"
-               target="_blank" title="Opens a page with the pugins we developed. [New Window/Tab]">plugins we develop</a>.
-        </p>
-        <p>
-            <!-- // MAILCHIMP SUBSCRIBE CODE \\ -->
-            1) <a href="http://eepurl.com/guNzr" target="_blank">Subscribe to our newsletter</a>
-            <!-- \\ MAILCHIMP SUBSCRIBE CODE // -->
-        </p>
-        <p>OR</p>
-        <p>
-            2) Subscribe using our QR code. [Scan it with your mobile device].<br/>
-            <img src="<?php echo plugin_dir_url(__FILE__); ?>/i/guNzr.qr.2.png" alt="" />
-        </p>
-
-
-        <?php
-        $plugin_slug = basename(__FILE__);
-        $plugin_slug = str_replace('.php', '', $plugin_slug);
-        $plugin_slug = 'wp-mibew'; // ::STMP:
-        ?>
-        <iframe style="width:100%;min-height:300px;height: auto;" width="640" height="480"
-                src="http://club.orbisius.com/wpu/content/wp/<?php echo $plugin_slug; ?>/" frameborder="0" allowfullscreen></iframe>
-
+    
+    <?php if (!empty($saved)) : ?>
+        <div class="updated">
+            <p>Settings were saved.</p>
+        </div>
     <?php endif; ?>
-    </div>
+
+	<div id="poststuff">
+
+		<div id="post-body" class="metabox-holder columns-2">
+
+			<!-- main content -->
+			<div id="post-body-content">
+
+				<div class="meta-box-sortables ui-sortable">
+
+					<div class="postbox">
+						<!--<h3><span>Settings</span></h3>-->
+						<div class="inside">
+                            <form method="post">
+                                <table class="widefat form-table000">
+                                    <tr valign="top">
+                                        <td valign="top" width="50%">
+                                            <!--<h2>Player Settings</h2>-->
+
+                                            <!-- Settings Table -->
+                                            <table class="widefat0">
+                                                <tr valign="top">
+                                                    <th scope="row"><label for="player_color">Player Color:</label></th>
+                                                    <td><input maxlength="10" size="4" id="player_color" name="player_color"
+                                                               autocomplete="off"
+                                                               value="#<?php echo esc_attr($current_options['player_color']); ?>" />
+                                                        <div id="player_color_picker"></div>
+                                                    </td>
+                                                </tr>
+                                                <tr valign="top">
+                                                    <th scope="row"><label for="background_color">Player Background Color:</label></th>
+                                                    <td><input maxlength="10" size="4" id="background_color" name="background_color"
+                                                               autocomplete="off"
+                                                               value="#<?php echo esc_attr($current_options['background_color']); ?>" />
+                                                        <div id="background_color_picker"></div>
+                                                    </td>
+                                                </tr>
+                                                <tr valign="top">
+                                                    <th scope="row"><label for="text_color">Text Color:</label></th>
+                                                    <td><input maxlength="10" size="4" id="text_color" name="text_color"
+                                                               autocomplete="off"
+                                                               value="#<?php echo esc_attr($current_options['text_color']); ?>" />
+                                                        <div id="text_color_picker"></div>
+                                                    </td>
+                                                </tr>
+                                                <tr valign="top">
+                                                    <th scope="row"><label for="width">Width (% or number):</label></th>
+                                                    <td>&nbsp;&nbsp;<input maxlength="10" size="4" id="width" name="width"
+                                                                           autocomplete="off"
+                                                                           value="<?php echo esc_attr($current_options['width']); ?>" />
+
+                                                        e.g. 100% or 250 (&larr; in pixels)
+                                                    </td>
+                                                </tr>
+                                                <tr valign="top">
+                                                    <th scope="row"><label for="slim">Slim Player</label></th>
+                                                    <td><input id="slim" name="slim" type="checkbox" value="1" <?php checked(1, $current_options['slim']); ?> />
+                                                        <label for="slim">Enable Slim Player (for songs only)</label>
+                                                    </td>
+                                                </tr>
+                                                <tr valign="top">
+                                                    <td>
+                                                        <input type="submit" name="save_settings" value="Save Changes" class="button-primary" />
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            <!-- /Settings Table -->
+                                        </td>
+                                        <td valign="top">
+                                            <div>
+                                                <label for="">
+                                                To see the preview please save the settings.</label>
+                                            </div>
+
+                                            <div class="">
+                                                <p>
+                                                    <?php //echo do_shortcode('[audiomack src="http://www.audiomack.com/song/hiphopfeeling/nowish"]');   ?>
+                                                    <?php echo do_shortcode('[audiomack src="http://www.audiomack.com/song/nas/let-nas-down-remix-feat-nas"]'); ?>
+                                                </p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </form>
+
+						</div> <!-- .inside -->
+
+					</div> <!-- .postbox -->
+
+                    <div class="postbox">
+                        <h3><span>Usage</span></h3>
+						<div class="inside">
+                            <div class="audiomack_help hide00">
+                                 <p>
+                                     You can use the plugin in several ways. <br/>
+
+                                     1. Click on this icon: <img src="<?php echo plugins_url('/tinymce/icon.jpg', __FILE__); ?>" alt="" /> in edit post/page
+                                     <br/>OR
+                                     <br/>2. Paste the shortcodes below with <strong>src</strong> attribute pointing to a song or an album.
+                                     The plugin will generate the necessary embed code.
+                                     <!--<br/>OR
+                                     <br/>3. JetPack (with activated Shortcode Embeds) or WordPress.com users: Just paste the link to a song/album
+                                     http://www.audiomack.com/song/nas/let-nas-down-remix-feat-nas-->
+                                 </p>
+                                 <p>
+                                    <table class="widefat">
+                                        <tr>
+                                            <td><strong>[audiomack src="http://www.audiomack.com/song/nas/let-nas-down-remix-feat-nas"]</strong></td>
+                                            <td>&larr; This will generate the embed code for a song</td>
+                                        </tr>
+                                        </tr>
+                                        <td><strong>[audiomack src="http://www.audiomack.com/album/tutankhamun-brothers/whats-a-black-beatle"]</strong></td>
+                                        <td>&larr; This will generate the embed code for an album</td>
+                                        </tr>
+                                    </table>
+                                 </p>
+                             </div>
+						</div> <!-- .inside -->
+					</div> <!-- .postbox -->
+                    
+				</div> <!-- .meta-box-sortables .ui-sortable -->
+
+			</div> <!-- post-body-content -->
+
+			<!-- sidebar -->
+			<div id="postbox-container-1" class="postbox-container">
+				<div class="meta-box-sortables">
+					<div class="postbox">
+                        <h3><span>Support &amp; Feature Requests</span></h3>
+						<div class="inside">
+                            If you have suggestions or run into an issue please email us at <a href="mailto:support@audiomack.com?subject=audiomack wp plugin">support@audiomack.com</a>.
+                            Please do NOT use the WordPress forums or other places to seek support.
+						</div> <!-- .inside -->
+					</div> <!-- .postbox -->
+
+					<div class="postbox">
+                        <h3><span>Video Demo</span></h3>
+						<div class="inside">
+                            <div>
+                                <div class="audiomack_plugin_demo hide0">
+                                    <a href="http://www.youtube.com/watch?v=dA3PU91jf0c&feature=youtu.be" class="button-primary"
+                                                        target="_blank">View Demo</a>
+                                </div>
+                            </div>
+						</div> <!-- .inside -->
+					</div> <!-- .postbox -->
+
+					<div class="postbox">
+                        <h3><span>Share</span></h3>
+						<div class="inside">
+                             <?php
+                                $plugin_data = get_plugin_data(__FILE__);
+
+                                $app_link = urlencode($plugin_data['PluginURI']);
+                                $app_title = urlencode($plugin_data['Name']);
+                                $app_descr = urlencode($plugin_data['Description']);
+                                ?>
+                                <p>
+                                    <!-- AddThis Button BEGIN -->
+                                <div class="addthis_toolbox addthis_default_style addthis_32x32_style">
+                                    <a class="addthis_button_facebook" addthis:url="<?php echo $app_link ?>" addthis:title="<?php echo $app_title ?>" addthis:description="<?php echo $app_descr ?>"></a>
+                                    <a class="addthis_button_twitter" addthis:url="<?php echo $app_link ?>" addthis:title="<?php echo $app_title ?>" addthis:description="<?php echo $app_descr ?>"></a>
+                                    <a class="addthis_button_google_plusone" g:plusone:count="false" addthis:url="<?php echo $app_link ?>" addthis:title="<?php echo $app_title ?>" addthis:description="<?php echo $app_descr ?>"></a>
+                                    <a class="addthis_button_linkedin" addthis:url="<?php echo $app_link ?>" addthis:title="<?php echo $app_title ?>" addthis:description="<?php echo $app_descr ?>"></a>
+                                    <a class="addthis_button_email" addthis:url="<?php echo $app_link ?>" addthis:title="<?php echo $app_title ?>" addthis:description="<?php echo $app_descr ?>"></a>
+                                    <!--<a class="addthis_button_myspace" addthis:url="<?php echo $app_link ?>" addthis:title="<?php echo $app_title ?>" addthis:description="<?php echo $app_descr ?>"></a>-->
+                                    <a class="addthis_button_google" addthis:url="<?php echo $app_link ?>" addthis:title="<?php echo $app_title ?>" addthis:description="<?php echo $app_descr ?>"></a>
+                                    <a class="addthis_button_digg" addthis:url="<?php echo $app_link ?>" addthis:title="<?php echo $app_title ?>" addthis:description="<?php echo $app_descr ?>"></a>
+                                    <a class="addthis_button_delicious" addthis:url="<?php echo $app_link ?>" addthis:title="<?php echo $app_title ?>" addthis:description="<?php echo $app_descr ?>"></a>
+                                    <a class="addthis_button_stumbleupon" addthis:url="<?php echo $app_link ?>" addthis:title="<?php echo $app_title ?>" addthis:description="<?php echo $app_descr ?>"></a>
+                                    <a class="addthis_button_tumblr" addthis:url="<?php echo $app_link ?>" addthis:title="<?php echo $app_title ?>" addthis:description="<?php echo $app_descr ?>"></a>
+                                    <a class="addthis_button_favorites" addthis:url="<?php echo $app_link ?>" addthis:title="<?php echo $app_title ?>" addthis:description="<?php echo $app_descr ?>"></a>
+                                    <a class="addthis_button_compact"></a>
+                                </div>
+                                <!-- The JS code is in the footer -->
+
+                                <script type="text/javascript">
+                                        var addthis_config = {"data_track_clickback": true};
+                                        var addthis_share = {
+                                            templates: {twitter: 'Check out {{title}} #WordPress #plugin at {{lurl}} (via @Audio_Mack)'}
+                                        }
+                                </script>
+                                <!-- AddThis Button START part2 -->
+                                <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=lordspace"></script>
+                                <!-- AddThis Button END part2 -->
+						</div> <!-- .inside -->
+					</div> <!-- .postbox -->
+				</div> <!-- .meta-box-sortables -->
+			</div> <!-- #postbox-container-1 .postbox-container -->
+		</div> <!-- #post-body .metabox-holder .columns-2 -->
+
+		<br class="clear">
+	</div> <!-- #poststuff -->
+
+</div> <!-- .wrap -->
     <?php
 }
 
